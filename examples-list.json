@@ -110,5 +110,9 @@
   {
     "path": "non-console",
     "title": "Top navigation"
+  },
+  {
+    "path": "marketplace",
+    "title": "Marketplace demo"
   }
 ]
