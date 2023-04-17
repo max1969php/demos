@@ -25,5 +25,6 @@
   { "path": "onboarding", "title": "Hands-on tutorials" },
   { "path": "split-panel-multiple", "title": "Split view" },
   { "path": "split-panel-comparison", "title": "Split view with details comparison" },
-  { "path": "non-console", "title": "Top navigation" }
+  { "path": "non-console", "title": "Top navigation" },
+  { "path": "table-fintech-dashboard", "title": "Fintech dashboard" }
 ]

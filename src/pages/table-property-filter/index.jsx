@@ -18,6 +18,7 @@ function App() {
   const [columnDefinitions, saveWidths] = useColumnWidths('React-TableServerSide-Widths', COLUMN_DEFINITIONS);
   const [preferences, setPreferences] = useLocalStorage('React-DistributionsTable-Preferences', DEFAULT_PREFERENCES);
   const [toolsOpen, setToolsOpen] = useState(false);
+  const [navigationOpen, setNavigationOpen] = useState(false);
   const appLayout = useRef();
 
   useEffect(() => {
@@ -32,21 +33,11 @@ function App() {
       navigation={<Navigation activeHref="#/distributions" />}
       notifications={<Notifications successNotification={true} />}
       breadcrumbs={<Breadcrumbs />}
-      content={
-        <PropertyFilterTable
-          data={distributions}
-          loadHelpPanelContent={() => {
-            setToolsOpen(true);
-            appLayout.current?.focusToolsClose();
-          }}
-          columnDefinitions={columnDefinitions}
-          saveWidths={saveWidths}
-          preferences={preferences}
-          setPreferences={setPreferences}
-          filteringProperties={FILTERING_PROPERTIES}
-        />
-      }
+      content={'hi'}
       contentType="table"
+      maxContentWidth={Number.MAX_VALUE}
+      navigationOpen={navigationOpen}
+      onNavigationChange={({ detail }) => setNavigationOpen(detail.open)}
       tools={<ToolsContent />}
       toolsOpen={toolsOpen}
       onToolsChange={({ detail }) => setToolsOpen(detail.open)}
