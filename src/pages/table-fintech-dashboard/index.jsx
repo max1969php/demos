@@ -1,13 +1,10 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-
-import DataProvider from '../commons/data-provider';
 import { useColumnWidths } from '../commons/use-column-widths';
-import { useLocalStorage } from '../commons/use-local-storage';
 import { ToolsContent } from '../table/common-components';
-import { CustomAppLayout, Navigation, Notifications } from '../commons/common-components';
+import { Navigation } from '../commons/common-components';
 import {
   BreadcrumbGroup,
   Container,
@@ -22,23 +19,40 @@ import {
   Select,
   Button,
 } from '@cloudscape-design/components';
-import {
-  COLUMN_DEFINITIONS,
-  relatedColumnDefinitions,
-  genData,
-  FILTERING_PROPERTIES,
-} from './table-property-filter-config';
+import { COLUMN_DEFINITIONS, genData, FILTERING_PROPERTIES } from './table-property-filter-config';
 import { PropertyFilterTable } from './property-filter-table';
 import '../../styles/base.scss';
 import DateRangePicker from './date-range-picker';
 
 const DEFAULT_PREFERENCES = {
   pageSize: 30,
-  visibleContent: ['id', 'domainName', 'deliveryMethod', 'sslCertificate', 'status', 'state'],
+  visibleContent: [
+    'name',
+    'amysbirdsanctuary',
+    'billswindsurfshop',
+    'coolcars',
+    'diegorodriguez',
+    'medicalSupplies',
+    'pyesCakes',
+    'barnettDesign',
+    'totalSharaBarnett',
+  ],
   wrapLines: false,
-  stripedRows: false,
+  stripedRows: true,
   contentDensity: 'compact',
 };
+
+export const CONTENT_DISPLAY_OPTIONS = [
+  { id: 'name', label: 'Line item', alwaysVisible: true },
+  { id: 'amysbirdsanctuary', label: 'Amys Bird Sanctuary' },
+  { id: 'billswindsurfshop', label: 'Bills Windsurf Shop' },
+  { id: 'coolcars', label: 'Cool cars' },
+  { id: 'diegorodriguez', label: 'Diego Rodriguez' },
+  { id: 'medicalSupplies', label: 'Medical supplies' },
+  { id: 'pyesCakes', label: 'Pyes Cakes' },
+  { id: 'barnettDesign', label: 'Barnett Design' },
+  { id: 'totalSharaBarnett', label: 'Total Shara Barnett' },
+];
 
 const Breadcrumbs = () => {
   return (
@@ -54,9 +68,9 @@ const Breadcrumbs = () => {
 };
 
 function App() {
-  const [distributions, setDistributions] = useState(genData());
+  const [data, setData] = useState(genData());
   const [columnDefinitions, saveWidths] = useColumnWidths('React-TableServerSide-Widths', COLUMN_DEFINITIONS);
-  const [preferences, setPreferences] = useLocalStorage('React-DistributionsTable-Preferences', DEFAULT_PREFERENCES);
+  const [preferences, setPreferences] = useState(DEFAULT_PREFERENCES);
   const [toolsOpen, setToolsOpen] = useState(false);
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [radioValue, setRadioValue] = React.useState('second');
@@ -160,7 +174,7 @@ function App() {
               </Box>
             </Container>
             <PropertyFilterTable
-              data={distributions}
+              data={data}
               loadHelpPanelContent={() => {
                 setToolsOpen(true);
                 appLayout.current?.focusToolsClose();
@@ -169,6 +183,7 @@ function App() {
               saveWidths={saveWidths}
               preferences={preferences}
               setPreferences={setPreferences}
+              contentDisplayOptions={CONTENT_DISPLAY_OPTIONS}
               filteringProperties={FILTERING_PROPERTIES}
             />
           </SpaceBetween>

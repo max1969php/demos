@@ -7,20 +7,14 @@ import Pagination from '@cloudscape-design/components/pagination';
 import Header from '@cloudscape-design/components/header';
 import Table from '@cloudscape-design/components/table';
 import { RelatedTable, useTreeCollection } from '@iot-app-kit/related-table';
-import {
-  distributionTableAriaLabels,
-  getHeaderCounterText,
-  getTextFilterCounterText,
-  paginationAriaLabels,
-  propertyFilterI18nStrings,
-} from '../../i18n-strings';
+import { distributionTableAriaLabels, paginationAriaLabels } from '../../i18n-strings';
 import { Preferences } from '../commons/table-config';
 
 import '../../styles/base.scss';
 
 export function PropertyFilterTable({
   data,
-  loadHelpPanelContent,
+  contentDisplayOptions,
   columnDefinitions,
   saveWidths,
   preferences,
@@ -61,9 +55,10 @@ export function PropertyFilterTable({
       expandChildren={expandNode}
       items={items}
       columnDefinitions={columnDefinitions}
-      // visibleColumns={preferences.visibleContent}
+      columnDisplay={preferences.contentDisplay}
       ariaLabels={distributionTableAriaLabels}
       variant="container"
+      stickyColumns={preferences.stickyColumns}
       stickyHeader={true}
       resizableColumns={true}
       wrapLines={preferences.wrapLines}
@@ -74,7 +69,13 @@ export function PropertyFilterTable({
       loadingText="Loading distributions"
       filter={<TextFilter filteringPlaceholder="Search" {...filterProps} />}
       pagination={<Pagination {...paginationProps} ariaLabels={paginationAriaLabels} />}
-      preferences={<Preferences preferences={preferences} setPreferences={setPreferences} />}
+      preferences={
+        <Preferences
+          preferences={preferences}
+          setPreferences={setPreferences}
+          contentDisplayOptions={contentDisplayOptions}
+        />
+      }
     />
   );
 }
