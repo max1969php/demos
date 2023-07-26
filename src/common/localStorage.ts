@@ -9,7 +9,7 @@ declare global {
 }
 
 const hasConsent = () => {
-  const isExternal = process.env.EXTERNAL_SITE;
+  const isExternal = process?.env?.EXTERNAL_SITE;
   if (!isExternal) {
     return true;
   }
