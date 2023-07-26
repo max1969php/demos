@@ -46,19 +46,5 @@
     "key": "sslCertificate",
     "groupValuesLabel": "SSL certificate values",
     "operators": [":", "!:", "=", "!="]
-  },
-  {
-    "propertyLabel": "environment",
-    "key": "tag-indicator__environment",
-    "groupValuesLabel": "Tags with key 'environment'",
-    "group": "tags",
-    "operators": [":", "!:", "=", "!="]
-  },
-  {
-    "propertyLabel": "department",
-    "key": "tag-indicator__department",
-    "groupValuesLabel": "Tags with key 'department'",
-    "group": "tags",
-    "operators": [":", "!:", "=", "!="]
   }
 ]
